@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+<div class="container" id="app">
+
+ <h3>İstifadəçilər (Ümumi sayı 5 nəfər)</h3>   
+ <button type="button" class="btn btn-primary float-right mb-2"data-toggle="modal" data-target="#istifadeciModal" 
+ data-whatever="@getbootstrap" @click="yeniIstifadeci">Yeni istifadəçi</button>
+
+<div class="modal fade" id="istifadeciModal" tabindex="-1" role="dialog" aria-labelledby="istifadeciModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="istifadeciModalLabel">Yeni istifadəçi</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form @submit.prevent="true">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">İstifadəçi adı:</label>
+            <input type="text" class="form-control" id="recipient-name" v-model="newUser.name" placeholder="Adınızı daxil edin: ">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Vəzifə:</label>
+            <select class="form-control" v-model="newUser.role">
+                <option value="">Seçin</option>
+                <option>Admin</option>
+                <option>User</option>
+            </select>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Çıx</button>
+        <button type="button" class="btn btn-primary" @click="istifadeciniYaddaSaxla">Yadda saxla</button>
+      </div>
+    </div>
+  </div>
+</div>
+ <table class="table table-sm mt-3 table-bordered table-hover" >
+     <thead class="thead-dark">
+        <tr>
+            <th>id</th> 
+            <th>ad</th>
+            <th>vəzifə</th>
+            <th>əməliyyat</th>
+        </tr>
+     </thead>
+     <tbody>
+                <tr v-for="(user,index) in users">
+                    <td>{{user.id}}</td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.role}}</td>
+                    <td>
+                        <button @click="remove(user.id)" class="btn btn-danger btn-sm">sil</button>
+                        <button @click="update(index)" class="btn btn-warning btn-sm">düzəlt</button>
+                    </td>
+                </tr>
+     </tbody>
+ </table>
+
+</div> 
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
